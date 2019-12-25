@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjt.mapper.ExamMapper" >
+  <resultMap id="BaseResultMap" type="com.zjt.pojo.Exam" >
+    <id column="tid" property="tid" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="ca" property="ca" jdbcType="VARCHAR" />
+    <result column="cb" property="cb" jdbcType="VARCHAR" />
+    <result column="cc" property="cc" jdbcType="VARCHAR" />
+    <result column="cd" property="cd" jdbcType="VARCHAR" />
+    <result column="answer" property="answer" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="score" property="score" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tid, title, ca, cb, cc, cd, answer, type, score
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zjt.pojo.ExamExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from exam
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from exam
+    where tid = #{tid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from exam
+    where tid = #{tid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zjt.pojo.ExamExample" >
+    delete from exam
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zjt.pojo.Exam" >
+    insert into exam (tid, title, ca, 
+      cb, cc, cd, answer, 
+      type, score)
+    values (#{tid,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{ca,jdbcType=VARCHAR}, 
+      #{cb,jdbcType=VARCHAR}, #{cc,jdbcType=VARCHAR}, #{cd,jdbcType=VARCHAR}, #{answer,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{score,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zjt.pojo.Exam" >
+    insert into exam
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tid != null" >
+        tid,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="ca != null" >
+        ca,
+      </if>
+      <if test="cb != null" >
+        cb,
+      </if>
+      <if test="cc != null" >
+        cc,
+      </if>
+      <if test="cd != null" >
+        cd,
+      </if>
+      <if test="answer != null" >
+        answer,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="score != null" >
+        score,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tid != null" >
+        #{tid,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="ca != null" >
+        #{ca,jdbcType=VARCHAR},
+      </if>
+      <if test="cb != null" >
+        #{cb,jdbcType=VARCHAR},
+      </if>
+      <if test="cc != null" >
+        #{cc,jdbcType=VARCHAR},
+      </if>
+      <if test="cd != null" >
+        #{cd,jdbcType=VARCHAR},
+      </if>
+      <if test="answer != null" >
+        #{answer,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zjt.pojo.ExamExample" resultType="java.lang.Integer" >
+    select count(*) from exam
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update exam
+    <set >
+      <if test="record.tid != null" >
+        tid = #{record.tid,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ca != null" >
+        ca = #{record.ca,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cb != null" >
+        cb = #{record.cb,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cc != null" >
+        cc = #{record.cc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cd != null" >
+        cd = #{record.cd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.answer != null" >
+        answer = #{record.answer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.score != null" >
+        score = #{record.score,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update exam
+    set tid = #{record.tid,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      ca = #{record.ca,jdbcType=VARCHAR},
+      cb = #{record.cb,jdbcType=VARCHAR},
+      cc = #{record.cc,jdbcType=VARCHAR},
+      cd = #{record.cd,jdbcType=VARCHAR},
+      answer = #{record.answer,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=VARCHAR},
+      score = #{record.score,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zjt.pojo.Exam" >
+    update exam
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="ca != null" >
+        ca = #{ca,jdbcType=VARCHAR},
+      </if>
+      <if test="cb != null" >
+        cb = #{cb,jdbcType=VARCHAR},
+      </if>
+      <if test="cc != null" >
+        cc = #{cc,jdbcType=VARCHAR},
+      </if>
+      <if test="cd != null" >
+        cd = #{cd,jdbcType=VARCHAR},
+      </if>
+      <if test="answer != null" >
+        answer = #{answer,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null" >
+        score = #{score,jdbcType=INTEGER},
+      </if>
+    </set>
+    where tid = #{tid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zjt.pojo.Exam" >
+    update exam
+    set title = #{title,jdbcType=VARCHAR},
+      ca = #{ca,jdbcType=VARCHAR},
+      cb = #{cb,jdbcType=VARCHAR},
+      cc = #{cc,jdbcType=VARCHAR},
+      cd = #{cd,jdbcType=VARCHAR},
+      answer = #{answer,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      score = #{score,jdbcType=INTEGER}
+    where tid = #{tid,jdbcType=INTEGER}
+  </update>
+  <select id="selectAll" resultType="com.zjt.pojo.Exam">
+    select * from exam
+  </select>
+
+</mapper>
