@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,7 +72,7 @@ public class QuestionController {
      * @return
      */
     @RequestMapping("/question/getquestions")
-        public String getquestions(Answer answer){
+        public String getquestions(Answer answer, HttpServletRequest request){
         int total = 0;
         int all = 0;
         System.out.println("the answer you get"+answer);
