@@ -13,10 +13,14 @@ public interface Service {
     public void add(Exam exam);
 
 
-    public void update(Exam exam);
+    public String update(Exam exam);
 
 
-    public void delete(Exam exam);
+    public String delete(int exam);
+
+    public  Exam getSingleQuestion(int id);
+
+    public List<Exam> getAllByType(String type);
 
 
 

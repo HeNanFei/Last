@@ -16,6 +16,7 @@
     <title></title>
     <link rel="stylesheet" href="css/pintuer.css">
     <link rel="stylesheet" href="css/admin.css">
+    <scrpt src="js/jquery-3.3.1.min.js"></scrpt>
     <script src="js/jquery.js"></script>
     <script src="js/pintuer.js"></script>
 </head>
@@ -41,9 +42,10 @@
                         <label>分类：</label>
                     </div>
                     <div class="field">
-                        <select name="cid" class="input w50">
-                            <option value="">单选题</option>
-                            <option value="">多选题</option>
+                        <select name="type" class="input w50">
+                            <option value="恶趣味选择">恶趣味选择</option>
+                            <option value="语文">语文</option>
+                            <option value="数学">数学</option>
                         </select>
                         <div class="tips"></div>
                     </div>
@@ -98,6 +100,8 @@
                     <div class="tips"></div>
                 </div>
             </div>
+
+
             <div class="form-group">
                 <div class="label">
                     <label>分数：</label>
@@ -120,5 +124,6 @@
         </form>
     </div>
 </div>
-
+<script type="text/javascript">
+</script>
 </body></html>

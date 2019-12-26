@@ -29,12 +29,13 @@ public class UserController {
         }else if (us.checkLogin(user).getType().equals("teacher")){
             page = "manager";
         }else if(us.checkLogin(user).getType().equals("student")){
-            page = "test";
+            page = "choice";
         }
         System.out.println(msg);
         request.setAttribute("msg","msg");
         return page;
     }
+
 
 
 }

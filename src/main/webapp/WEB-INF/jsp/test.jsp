@@ -35,12 +35,13 @@
     <div class="test_main">
         <div class="nr_left">
             <div class="test">
-                <form action="/Last/question/getquestions" method="post">
+                <form action="/Last/question/getquestions" id="formTable" method="post">
                     <div class="test_title">
                         <p class="test_time">
                             <i class="icon iconfont">&#xe6fb;</i><b class="alt-1">01:40</b>
                         </p>
                         <font><input type="submit" name="test_jiaojuan" value="交卷"></font>
+                        <font><input type="button" id="testButton" name="test_jiaojuan" value="测试按钮"></font>
                     </div>
 
                     <div class="test_content">
@@ -120,7 +121,39 @@
     <div class="foot"></div>
 </div>
 <script type="text/javascript">
+    var some;
+
+    function formUpload(strings){
+        alert('ajax里的strings'+strings);
+        $.ajax({
+            url:'/Last/question/getformdata',
+            data:{strings:strings},
+            success:function () {
+                window.location.href = "/Last/question/getformdata?strings="+strings;
+            },error:function () {
+                alert('妈蛋，答案出错了');
+            }
+        })
+    }
+
     $(function () {
+
+
+        $('#testButton').click(function () {
+            var strings = [];
+            var strings2;
+            var formData = $('#formTable').serializeArray();
+
+            some = JSON.stringify(formData);
+            $.each(formData,function (i,item) {
+                strings.push(item.value);
+
+            })
+            strings2 = strings.toString();
+            formUpload(strings2);
+        })
+
+
         $.ajax({
             url: '/Last/question/findall',
             dataType: 'json',

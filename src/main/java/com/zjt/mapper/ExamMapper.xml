@@ -270,8 +270,10 @@
       score = #{score,jdbcType=INTEGER}
     where tid = #{tid,jdbcType=INTEGER}
   </update>
-  <select id="selectAll" resultType="com.zjt.pojo.Exam">
+  <select id="selectAll" resultType="com.zjt.pojo.Exam" parameterType="java.lang.String">
     select * from exam
   </select>
+
+
 
 </mapper>

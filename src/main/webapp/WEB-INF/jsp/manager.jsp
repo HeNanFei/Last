@@ -29,6 +29,8 @@
     <h2><span class="icon-user"></span>基本设置</h2>
     <ul style="display:block">
         <li><a href="../add.jsp" target="right"><span class="icon-caret-right"></span>增加题目</a></li>
+        <li><a href="../titles.jsp" target="right"><span class="icon-caret-right"></span>题目管理</a></li>
+        <li><a href="../scorelist.jsp" target="right"><span class="icon-caret-right"></span>成绩管理</a></li>
     </ul>
 
 </div>

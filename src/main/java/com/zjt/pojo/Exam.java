@@ -90,4 +90,19 @@ public class Exam {
     public void setScore(Integer score) {
         this.score = score;
     }
+
+    @Override
+    public String toString() {
+        return "Exam{" +
+                "tid=" + tid +
+                ", title='" + title + '\'' +
+                ", ca='" + ca + '\'' +
+                ", cb='" + cb + '\'' +
+                ", cc='" + cc + '\'' +
+                ", cd='" + cd + '\'' +
+                ", answer='" + answer + '\'' +
+                ", type='" + type + '\'' +
+                ", score=" + score +
+                '}';
+    }
 }

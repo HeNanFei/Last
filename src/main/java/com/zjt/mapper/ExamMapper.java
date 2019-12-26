@@ -33,4 +33,6 @@ public interface ExamMapper {
     int updateByPrimaryKey(Exam record);
 
     List<Exam> selectAll();
+
+
 }
