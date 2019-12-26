@@ -48,8 +48,8 @@
                         <div class="test_content_title">
                             <h2>单选题</h2>
                             <p>
-                                <span>共</span><i class="content_lit">60</i><span>题，</span><span>合计</span><i
-                                    class="content_fs">60</i><span>分</span>
+                                <span>共</span><i class="content_lit" id="totaltitle"></i><span>题，</span><span>合计</span><i
+                                    class="content_fs" id="totalscores"></i><span>分</span>
                             </p>
                         </div>
                     </div>
@@ -82,35 +82,19 @@
                         <div class="rt_content_tt">
                             <h2>单选题</h2>
                             <p>
-                                <span>共</span><i class="content_lit">60</i><span>题</span>
+                                <span>共</span><i class="content_lit" id="secondTotal"></i><span>题</span>
                             </p>
                         </div>
                         <div class="rt_content_nr answerSheet">
-                            <ul>
+                            <ul id="titleList">
 
-                                <li><a href="#qu_0_0">1</a></li>
 
 
                             </ul>
                         </div>
                     </div>
 
-                    <div class="rt_content">
-                        <div class="rt_content_tt">
-                            <h2>多选题</h2>
-                            <p>
-                                <span>共</span><i class="content_lit">30</i><span>题</span>
-                            </p>
-                        </div>
-                        <div class="rt_content_nr answerSheet">
-                            <ul>
 
-                                <li><a href="#qu_1_0">1</a></li>
-
-
-                            </ul>
-                        </div>
-                    </div>
 
                 </div>
 
@@ -137,6 +121,9 @@
     }
 
     $(function () {
+
+        getTotal();
+
 
 
         $('#testButton').click(function () {
@@ -227,6 +214,27 @@
 
         })
     })
+
+    function getTotal() {
+        $.ajax({
+            url:'/Last/question/gettotal',
+            success:function (msg) {
+
+                $('#totalscores').append(msg.score);
+                $('#totaltitle').append(msg.titles);
+                $('#secondTotal').append(msg.titles);
+                var t = msg.titles;
+                var number = parseInt(t);
+                for(var i=0;i<t;i++){
+                    $('#titleList').append('<li><a href="#qu_0_0">'+returnInt(i)+'</a></li>');
+                }
+
+            }
+        })
+    }
+
+
+
     function returnInt(i) {
 
         return i+1;
