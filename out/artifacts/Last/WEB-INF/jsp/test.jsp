@@ -40,8 +40,11 @@
                         <p class="test_time">
                             <i class="icon iconfont">&#xe6fb;</i><b class="alt-1">01:40</b>
                         </p>
+<%--  应急按钮                      --%>
+<%--
                         <font><input type="submit" name="test_jiaojuan" value="交卷"></font>
-                        <font><input type="button" id="testButton" name="test_jiaojuan" value="测试按钮"></font>
+--%>
+                        <font><input type="button" id="testButton" name="test_jiaojuan" value="交卷"></font>
                     </div>
 
                     <div class="test_content">
@@ -108,14 +111,14 @@
     var some;
 
     function formUpload(strings){
-        alert('ajax里的strings'+strings);
+
         $.ajax({
             url:'/Last/question/getformdata',
             data:{strings:strings},
             success:function () {
                 window.location.href = "/Last/question/getformdata?strings="+strings;
             },error:function () {
-                alert('妈蛋，答案出错了');
+                alert('呵，没答完就交，你怕是想挂科~~');
             }
         })
     }
@@ -219,7 +222,7 @@
         $.ajax({
             url:'/Last/question/gettotal',
             success:function (msg) {
-                alert('获取总数请求成功');
+
                 $('#totalscores').append(msg.score);
                 $('#totaltitle').append(msg.titles);
                 $('#secondTotal').append(msg.titles);

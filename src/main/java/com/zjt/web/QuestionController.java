@@ -2,10 +2,8 @@ package com.zjt.web;
 
 import ch.qos.logback.core.net.SyslogOutputStream;
 import com.alibaba.fastjson.JSON;
-import com.zjt.pojo.Answer;
-import com.zjt.pojo.Exam;
-import com.zjt.pojo.JSONObject;
-import com.zjt.pojo.Total;
+import com.zjt.pojo.*;
+import com.zjt.service.ScoreService;
 import com.zjt.service.Service;
 import org.apache.jasper.tagplugins.jstl.core.ForEach;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +15,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -25,6 +25,9 @@ public class QuestionController {
 
     @Autowired
     private Service service;
+
+    @Autowired
+    private ScoreService scoreService;
 
     @GetMapping(value = {"/", "/index"})
     public String index() {
@@ -162,22 +165,32 @@ public class QuestionController {
     }
 
     @RequestMapping("/question/getformdata")
-    public String getformdata(String strings,HttpServletRequest request){
+    public String getformdata(String strings, HttpServletRequest request, HttpSession session){
+        User user = (User)session.getAttribute("user");
+
+
         int sumSocre = 0;
         int templateScore =0;
         System.out.println(strings);
         String[] split = strings.split(",");
-        System.out.println(split.length+"尺度");
-
-        List<Exam> all = service.getAll();
-        System.out.println(all.size());
+        List<Exam> all = service.getAllByType(choice);
         for (int i = 0;i<all.size();i++){
-            if(all.get(i).getAnswer().equals(split[i])){
+            if(all.get(i).getAnswer()==split[i]==true){
+                System.out.println("结果"+all.get(i).getAnswer()==split[i]);
+                templateScore = all.get(i).getScore();
+                sumSocre+= templateScore;
+            }
+            /*if(all.get(i).getAnswer().equals(split[i])){
                 templateScore = all.get(i).getScore();
                 sumSocre += templateScore;
-            }
+            }*/
         }
-
+        Score score = new Score();
+        Date date = new Date();
+        score.setCdate(date);
+        score.setScore(sumSocre);
+        score.setSname(user.getName());
+        scoreService.insertScore(score);
 
         System.out.println("总分realupdate" + sumSocre);
         request.setAttribute("score", sumSocre);

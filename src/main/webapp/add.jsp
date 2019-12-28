@@ -58,7 +58,7 @@
                         A <input id="ishome"  name="answer" type="checkbox" value="A"/>
                         B <input id="isvouch" name="answer" type="checkbox" value="B" />
                         C <input id="istop" name="answer" type="checkbox" value="C"/>
-                        C <input id="istop" name="answer" type="checkbox" value="D"/>
+                        D <input id="istop" name="answer" type="checkbox" value="D"/>
                     </div>
                 </div>
             </if>

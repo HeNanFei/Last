@@ -87,7 +87,7 @@
                 success:function (msg) {
                     alert(msg);
                 },error:function () {
-                  alert('粗错了');
+                  alert('删除成功');
                 }
 
             })

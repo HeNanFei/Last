@@ -11,6 +11,7 @@ import org.springframework.web.servlet.handler.UserRoleAuthorizationInterceptor;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class UserController {
@@ -18,7 +19,7 @@ public class UserController {
     @Resource
     private UserService us;
     @RequestMapping("/usr/checkLogin")
-    public String login(User user, HttpServletRequest request){
+    public String login(User user, HttpServletRequest request, HttpSession session){
         System.out.println(user);
         String msg = null;
         String page = null;
@@ -27,8 +28,10 @@ public class UserController {
             msg ="the account or password is wrong";
             page = "er";
         }else if (us.checkLogin(user).getType().equals("teacher")){
+            session.setAttribute("user",user);
             page = "manager";
         }else if(us.checkLogin(user).getType().equals("student")){
+            request.getSession().setAttribute("user",user);
             page = "choice";
         }
         System.out.println(msg);
@@ -36,6 +39,11 @@ public class UserController {
         return page;
     }
 
+
+    @RequestMapping("/usr/error")
+    public String usererror(){
+        return "add";
+    }
 
 
 }

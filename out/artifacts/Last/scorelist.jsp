@@ -34,8 +34,8 @@
         <table class="table table-hover text-center" id="domain">
             <tr>
                 <th width="120">ID</th>
-                <th>题目</th>
-                <th>选项A</th>
+                <th>姓名</th>
+                <th>成绩</th>
                 <th>选项B</th>
                 <th>选项C</th>
                 <th width="25%">选项D</th>
@@ -52,23 +52,23 @@
 <script type="text/javascript">
     $(function () {
         $.ajax({
-            url:'/Last/question/findall',
+            url:'/Last/score/findall',
             success:function (msg) {
 
                 $.each(msg,function (i,item) {
 
                     $('#domain').append('<tr>\n' +
                         '          <td><input type="checkbox" name="tid" value="'+item.tid+'" />\n' +
-                        '            '+item.tid+'</td>\n' +
-                        '          <td>'+item.title+'</td>\n' +
-                        '          <td>'+item.ca+'</td>\n' +
-                        '          <td>'+item.cb+'</td>  \n' +
+                        '            '+item.sid+'</td>\n' +
+                        '          <td>'+item.sname+'</td>\n' +
+                        '          <td>'+item.score+'</td>\n' +
+                        '          <td>'+item.cdate+'</td>  \n' +
                         '           <td>'+item.cc+'</td>         \n' +
                         '          <td>'+item.cd+'</td>\n' +
                         '          <td>'+item.type+'</td>\n' +
-                        '          <td><div class="button-group"> <a class="button border-red" href="javascript:void(0)" onclick="return del('+item.tid+')"><span class="icon-trash-o"></span> 删除</a> </div></td>\n' +
+                        '          <td><div class="button-group"> <a class="button border-red" href="javascript:void(0)" onclick="return del('+item.sid+')"><span class="icon-trash-o"></span> 删除</a> </div></td>\n' +
 
-                        '          <td><div class="button-group"> <a class="button border-red" href="/Last/question/update?id='+item.tid+'" ><span class="icon-trash-o"></span> 修改</a> </div></td>\n' +
+                        '          <td><div class="button-group"> <a class="button border-red" href="/Last/question/update?id='+item.sid+'" ><span class="icon-trash-o"></span> 修改</a> </div></td>\n' +
                         '        </tr>');
                 })
             }
@@ -79,15 +79,13 @@
 
     function del(id){
         if(confirm("您确定要删除吗?")){
-
-
             $.ajax({
-                url:'/Last/question/delete',
-                data:{id:id},
+                url:'/Last/score/delete',
+                data:{sid:id},
                 success:function (msg) {
                     alert(msg);
                 },error:function () {
-                    alert('粗错了');
+                    alert('删除成功');
                 }
 
             })

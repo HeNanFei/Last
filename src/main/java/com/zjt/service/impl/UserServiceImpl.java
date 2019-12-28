@@ -6,6 +6,8 @@ import com.zjt.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -18,5 +20,10 @@ public class UserServiceImpl implements UserService {
         User user1 = um.getUser(user);
 
         return user1;
+    }
+
+    @Override
+    public void addUser(List<User> list) {
+
     }
 }

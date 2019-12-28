@@ -47,8 +47,8 @@
 
 		<!-- 系统用户 这里不指定schema，逆向工程会查询sysuser都有哪些schema，对每个schema生成对象 -->
 
-		<table schema="" tableName="exam" />
-		
+		<table schema="" tableName="score" />
+
 
 
 
